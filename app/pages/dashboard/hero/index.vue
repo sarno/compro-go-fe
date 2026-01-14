@@ -89,11 +89,11 @@ const deleteHero = async () => {
   <div
     v-if="successMessage"
     id="toast-success"
-    class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+    class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow text-gray-900 bg-gray-100"
     role="alert"
   >
     <div
-      class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200"
+      class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg"
     >
       <svg
         class="w-5 h-5"
@@ -112,7 +112,7 @@ const deleteHero = async () => {
     <button
       @click="closeToast"
       type="button"
-      class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+      class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
       data-dismiss-target="#toast-success"
       aria-label="Close"
     >
@@ -139,61 +139,40 @@ const deleteHero = async () => {
     <div class="my-5 text-2xl font-bold">List Data Hero</div>
     <NuxtLink
       to="/dashboard/hero/create"
-      class="mr-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      class="mr-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
       >Tambah Data</NuxtLink
     >
     <div v-if="loading">Loading...</div>
   </div>
 
   <div class="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
-    <table
-      v-if="data.data && data.data.length"
-      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-    >
-      <thead
-        class="text-xs border-b text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400"
-      >
+    <table class="w-full text-sm text-left text-gray-700 bg-white">
+      <thead class="text-xs uppercase bg-gray-200 text-gray-700 border-b">
         <tr>
-          <th scope="col" class="px-6 py-3">Heading</th>
-          <th scope="col" class="px-6 py-3">Sub Heading</th>
-          <th scope="col" class="px-6 py-3">Banner</th>
-          <th scope="col" class="px-6 py-3">Video</th>
-          <th scope="col" class="px-6 py-3">Action</th>
+          <th class="px-6 py-3">Heading</th>
+          <th class="px-6 py-3">Sub Heading</th>
+          <th class="px-6 py-3">Banner</th>
+          <th class="px-6 py-3">Video</th>
+          <th class="px-6 py-3">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr
           v-for="item in data.data"
           :key="item.id"
-          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+          class="border-b hover:bg-gray-100"
         >
-          <th
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          >
+          <td class="px-6 py-4 font-medium text-gray-900">
             {{ item.heading }}
-          </th>
-          <td class="px-6 py-4">
-            {{ item.subheading }}
           </td>
+          <td class="px-6 py-4">{{ item.subheading }}</td>
           <td class="px-6 py-4">
-            <img :src="item.banner" class="w-10 h-10" alt="" />
+            <img :src="item.banner" class="w-10 h-10" />
           </td>
-          <td class="px-6 py-4">
-            {{ item.path_video }}
-          </td>
-          <td class="flex items-center px-6 py-4">
-            <NuxtLink
-              :to="`/dashboard/hero/edit/${item.id}`"
-              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >Edit</NuxtLink
-            >
-            <button
-              @click="openDeleteModal(item.id)"
-              class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"
-            >
-              Remove
-            </button>
+          <td class="px-6 py-4">{{ item.path_video }}</td>
+          <td class="px-6 py-4 flex gap-3">
+            <NuxtLink class="text-blue-600 hover:underline">Edit</NuxtLink>
+            <button class="text-red-600 hover:underline">Remove</button>
           </td>
         </tr>
       </tbody>
