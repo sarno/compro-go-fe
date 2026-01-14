@@ -12,13 +12,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="dark:bg-gray-800 dark:text-gray-300">
+  <div class="bg-gray-100 text-gray-800">
     <NavbarAdmin />
     <SidebarAdmin />
 
-    <div class="p-4 sm:ml-64 dark:bg-gray-800">
+    <div class="p-4 sm:ml-64 bg-gray-100">
       <div
-        class="h-full p-4 bg-white dark:bg-gray-800 dark:border-gray-700 mt-14"
+        class="h-full p-4 bg-white border-gray-200 mt-14"
       >
         <NuxtPage />
       </div>

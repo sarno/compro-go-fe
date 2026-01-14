@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import auth from "~/stores/middleware/auth";
+import { fetchData, deleteData } from "~/utils/api";
+import { useRoute } from "vue-router";
 
 definePageMeta({
   layout: "admin",
@@ -16,6 +18,71 @@ const showToast = ref(false);
 const route = useRoute();
 const itemToDelete = ref(null);
 let successMessage = ref(null);
+
+onMounted(() => {
+  if (route.query.success) {
+    showToast.value = true;
+  }
+
+  if (isAuthenticated) {
+    loadData();
+  }
+
+  const message = sessionStorage.getItem("successMessage");
+  if (message) {
+    successMessage.value = message;
+    setTimeout(() => {
+      successMessage.value = null;
+      sessionStorage.removeItem("successMessage");
+    }, 5000);
+  }
+});
+
+const loadData = async () => {
+  if (!isAuthenticated) {
+    return;
+  }
+
+  loading.value = true;
+  try {
+    data.value = await fetchData("/hero-sections/admin");
+  } catch (error) {
+    console.error("Gagal mengambil data:", error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+const openDeleteModal = (id) => {
+  itemToDelete.value = id;
+  const modal = document.getElementById("popup-modal");
+  if (modal) {
+    modal.classList.remove("hidden");
+  }
+};
+
+const closeDeleteModal = () => {
+  const modal = document.getElementById("popup-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+  }
+};
+
+const deleteHero = async () => {
+  // Proses penghapusan data berdasarkan itemToDelete
+  const id = itemToDelete.value;
+  if (id) {
+    try {
+      await deleteData("/hero-sections/admin", id);
+      successMessage = "Data berhasil dihapus!";
+      sessionStorage.setItem("successMessage", successMessage);
+      await loadData();
+      closeDeleteModal();
+    } catch (error) {
+      console.error("Gagal menghapus data:", error);
+    }
+  }
+};
 </script>
 
 <template>

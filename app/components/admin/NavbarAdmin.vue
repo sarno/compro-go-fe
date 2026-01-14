@@ -1,9 +1,9 @@
 <template>
   <div>
     <nav
-      class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-dark-700 dark:bg-gray-800 dark:border-gray-700"
+      class="fixed top-0 z-50 w-full bg-white border-b border-gray-200"
     >
-      <div class="px-3 py-3 lg:px-5 lg:pl-3 dark:bg-gray-800">
+      <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center justify-start rtl:justify-end">
             <button
@@ -11,7 +11,7 @@
               data-drawer-toggle="logo-sidebar"
               aria-controls="logo-sidebar"
               type="button"
-              class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
             >
               <span class="sr-only">Open sidebar</span>
               <svg
@@ -35,7 +35,7 @@
                 alt="FlowBite Logo"
               />
               <span
-                class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"
+                class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap"
                 >ComproGo</span
               >
             </a>
